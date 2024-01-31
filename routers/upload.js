@@ -1,12 +1,19 @@
 const express = require('express')
+const multer = require('multer')
 const router = express.Router()
+const configMulter = require('../config/UploadConfig')
 
 
-var upload = require('../config/configMulter')
+const uploadImage = multer({storage:configMulter})
 
 
-router.post('/photos/upload', upload.single(), (req, res) =>{
-    res.write('POST FUNCIONANDO')
+router.post('/photos/upload', uploadImage.single('file'), (req, res) =>{
+    res.status(200).send('SUCESSO!!!')
+    res.end()
+})
+
+router.get('/photos/upload', (req, res) =>{
+    fs.readFile(formUpload)
     res.end()
 })
 
